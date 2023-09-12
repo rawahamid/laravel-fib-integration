@@ -2,8 +2,8 @@
 
 namespace Rawahamid\FibIntegration;
 
-use Illuminate\Http\JsonResponse;
 use Symfony\Component\CssSelector\Exception\InternalErrorException;
+use Symfony\Component\HttpFoundation\Response;
 
 class Fib
 {
@@ -15,10 +15,13 @@ class Fib
         };
     }
 
+    /**
+     * @throws InternalErrorException
+     */
     protected static function checkResponse($response, $message = 'Internal Server Error')
     {
         if ($response->failed()) {
-            throw new InternalErrorException($message, JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+            throw new InternalErrorException($message, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         return $response->json();

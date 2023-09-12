@@ -5,9 +5,13 @@ namespace Rawahamid\FibIntegration\Payments;
 use Illuminate\Support\Facades\Http;
 use Rawahamid\FibIntegration\Fib;
 use Rawahamid\FibIntegration\Interfaces\PaymentInterface;
+use Symfony\Component\CssSelector\Exception\InternalErrorException;
 
 class FibPayment extends Fib implements PaymentInterface
 {
+    /**
+     * @throws InternalErrorException
+     */
     public static function authenticate()
     {
         $response = Http::asForm()->post(self::baseUrl() . '/auth/realms/fib-online-shop/protocol/openid-connect/token', [
@@ -19,6 +23,9 @@ class FibPayment extends Fib implements PaymentInterface
         return self::checkResponse($response, 'Payment Creation Failed');
     }
 
+    /**
+     * @throws InternalErrorException
+     */
     public static function create($amount, $description = '')
     {
         $description = self::trimDescription($description);
@@ -36,6 +43,9 @@ class FibPayment extends Fib implements PaymentInterface
         return self::checkResponse($response, 'Payment Creation Failed');
     }
 
+    /**
+     * @throws InternalErrorException
+     */
     public static function cancel($paymentId)
     {
         $response = Http::withToken(self::authenticate()['access_token'])
@@ -44,6 +54,9 @@ class FibPayment extends Fib implements PaymentInterface
         return self::checkResponse($response, 'Cancel Payment Failed');
     }
 
+    /**
+     * @throws InternalErrorException
+     */
     public static function status($paymentId)
     {
         $response = Http::withToken(self::authenticate()['access_token'])
