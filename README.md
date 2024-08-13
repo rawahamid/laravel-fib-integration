@@ -23,7 +23,7 @@ php artisan vendor:publish --tag="fib"
 ## Configuration variables
 All that is left to do is to define four env configuration variables inside `.env` file
 ```dotenv
-FIB_ENVIRONMENT="staging"
+FIB_ENVIRONMENT="stage"
 FIB_CALLBACK_URL="https://localhost:8000/fib-callback-url"
 FIB_CLIENT_ID="client-id"
 FIB_CLIENT_SECRET="client-secret"

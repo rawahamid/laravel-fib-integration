@@ -20,7 +20,7 @@ class FibPayment extends Fib implements PaymentInterface
             'client_secret' => config('fib.client_secret'),
         ]);
 
-        return self::checkResponse($response, 'Payment Creation Failed');
+        return self::checkResponse($response);
     }
 
     /**
@@ -40,7 +40,7 @@ class FibPayment extends Fib implements PaymentInterface
                 'description' => $description,
             ]);
 
-        return self::checkResponse($response, 'Payment Creation Failed');
+        return self::checkResponse($response);
     }
 
     /**
@@ -51,7 +51,7 @@ class FibPayment extends Fib implements PaymentInterface
         $response = Http::withToken(self::authenticate()['access_token'])
             ->post(self::baseUrl() . '/protected/v1/payments/'.$paymentId.'/cancel');
 
-        return self::checkResponse($response, 'Cancel Payment Failed');
+        return self::checkResponse($response);
     }
 
     /**
@@ -62,6 +62,6 @@ class FibPayment extends Fib implements PaymentInterface
         $response = Http::withToken(self::authenticate()['access_token'])
             ->get(self::baseUrl() . '/protected/v1/payments/'.$paymentId.'/status');
 
-        return self::checkResponse($response, 'Check Payment Status Failed');
+        return self::checkResponse($response);
     }
 }

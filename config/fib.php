@@ -7,7 +7,7 @@ return [
    |--------------------------------------------------------------------------
    |
    | This value is the environment that you want to choose for FIB integration to your application.
-   | values are (staging, production)
+   | values are (dev, stage, prod)
    |
    */
     'environment' => env('FIB_ENVIRONMENT', 'stage'),
