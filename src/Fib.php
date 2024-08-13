@@ -10,7 +10,8 @@ class Fib
     protected static function baseUrl(): string
     {
         return match (config('fib.environment')) {
-            'production' => 'https://fib.prod.fib.iq',
+            'prod' => 'https://fib.prod.fib.iq',
+            'dev' => 'https://fib.dev.fib.iq',
             default => 'https://fib.stage.fib.iq'
         };
     }
@@ -21,7 +22,7 @@ class Fib
     protected static function checkResponse($response, $message = 'Internal Server Error')
     {
         if ($response->failed()) {
-            throw new InternalErrorException($message, Response::HTTP_INTERNAL_SERVER_ERROR);
+            throw new InternalErrorException($response->failed(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         return $response->json();
