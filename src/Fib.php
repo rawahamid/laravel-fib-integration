@@ -11,6 +11,7 @@ class Fib
     {
         return match (config('fib.environment')) {
             'production' => 'https://fib.prod.fib.iq',
+            'development' => 'https://fib.dev.fib.iq',
             default => 'https://fib.stage.fib.iq'
         };
     }
